@@ -1,0 +1,22 @@
+function testNetworkSpeed() {
+  var imageAddr = "https://google.com.vn"; // Đường dẫn đến một hình ảnh hoặc tập tin lớn trên mạng LAN
+  var startTime, endTime;
+  var download = new Image();
+  download.onload = function () {
+    endTime = (new Date()).getTime();
+    showResults();
+  }
+  
+  startTime = (new Date()).getTime();
+  download.src = imageAddr + "?n=" + Math.random();
+  
+  function showResults() {
+    var duration = (endTime - startTime) / 1000; // Chuyển đổi thời gian thành giây
+    var bitsLoaded = download.fileSize * 8;
+    var speedMbps = (bitsLoaded / duration / (1024 * 1024)).toFixed(2); // Tính toán tốc độ trong Mbps và làm tròn đến 2 chữ số thập phân
+    console.log("Tốc độ mạng LAN của bạn là: " + speedMbps + " Mbps");
+  }
+}
+
+// Gọi hàm để thử nghiệm tốc độ mạng LAN
+testNetworkSpeed();
